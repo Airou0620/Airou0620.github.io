@@ -1,40 +1,137 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Restaurant Finder</title>
-</head>
-<body>
-<h1>Welcome to Restaurant Finder</h1>
-<form>
-<label for="location">Choose a location:</label>
-<select id="location" name="location">
-<option value="高雄">高雄</option>
-<option value="屏東">屏東</option>
-<option value="台南">台南</option>
-<option value="嘉義">嘉義</option>
-<option value="雲林">雲林</option>
-<option value="彰化">彰化</option>
-<option value="台中">台中</option>
-<option value="台北">台北</option>
-</select>
-<br>
-<label for="type">Choose a type of restaurant:</label>
-<select id="type" name="type">
-<option value="all you can eat">吃到飽</option>
-<option value="not all you can eat">非吃到飽</option>
-</select>
-<br>
-<label for="food">Choose a type of food:</label>
-<select id="food" name="food">
-<option value="西式餐點">西式餐點</option>
-<option value="義式餐廳">義式餐廳</option>
-<option value="日式餐廳">日式餐廳</option>
-</select>
-<br>
-<input type="submit" value="Submit">
-</form>
-</body>
+  <head>
+    <title>Restaurant Finder</title>
+  </head>
+  <body>
+    <form>
+      <h2>Select Location:</h2>
+      <select id="location">
+        <option value="">Select</option>
+        <option value="高雄">高雄</option>
+        <option value="屏東">屏東</option>
+        <option value="台南">台南</option>
+        <option value="嘉義">嘉義</option>
+        <option value="雲林">雲林</option>
+        <option value="彰化">彰化</option>
+        <option value="台中">台中</option>
+        <option value="台北">台北</option>
+      </select>
+      <br>
+      <br>
+      <h2>All You Can Eat?</h2>
+      <input type="radio" id="ayce-yes" name="ayce" value="Yes">
+      <label for="ayce-yes">Yes</label>
+      <input type="radio" id="ayce-no" name="ayce" value="No">
+      <label for="ayce-no">No</label>
+      <br>
+      <br>
+      <h2>Select Cuisine:</h2>
+      <select id="cuisine">
+        <option value="">Select</option>
+        <option value="西式餐點">西式餐點</option>
+        <option value="義式餐廳">義式餐廳</option>
+        <option value="日式餐廳">日式餐廳</option>
+        <option value="鴨肉飯">鴨肉飯</option>
+        <option value="義大利麵、披薩、炸雞、濃湯">義大利麵、披薩、炸雞、濃湯</option>
+        <option value="大阪燒">大阪燒</option>
+        <option value="美式漢堡">美式漢堡</option>
+      </select>
+      <br>
+      <br>
+      <button type="button" onclick="displayResults()">Submit</button>
+    </form>
+    <div id="results"></div>
+    <script>
+      function displayResults() {
+        var location = document.getElementById("location").value;
+        var ayce = document.querySelector('input[name="ayce"]:checked').value;
+        var cuisine = document.getElementById("cuisine").value;
+        var restaurants = [
+          {
+            name: "鴨肉珍",
+            address: "高雄市鹽埕區五福四路258號",
+            city: "高雄",
+            ayce: "No",
+            cuisine: "鴨肉飯",
+            price: "50~120NTD",
+            website: "https://www.google.com/maps/place/%E9%B4%A8%E8%82%89%E7%8F%8D/@22.6229937,120.2824122,17z/data=!3m1!4b1!4m5!3m4!1s0x346e04e3d3d9e9c5:0x9f1c8b8e2f2a09b1!8m2!3d22.6229937!4d120.284602"
+          },
+          {
+            name: "趕鴨子上桌",
+            address: "高雄市新興區中山二路472號之一",
+            city: "高雄",
+            ayce: "No",
+            cuisine: "鴨肉飯",
+            price: "80~200NTD",
+            website: "https://www.google.com/maps/place/%E8%B6%95%E9%B4%A8%E5%AD%90%E4%B8%8A%E6%A1%8C/@22.631279,120.299549,17z/data=!3m1!4b1!4m5!3m4!1s0x346e04d3e77f9e7f:0xf5e5f8a5c5a5aac1!8m2!3d22.631279!4d120.301738"
+          },
+          {
+            name: "七賢鴨肉飯",
+            address: "高雄市前金區七賢二路220號",
+            city: "高雄",
+            ayce: "No",
+            cuisine: "鴨肉飯",
+            price: "25~100NTD",
+            website: "https://www.google.com/maps/place/%E4%B8%83%E8%B3%A2%E9%B4%A8%E8%82%89%E9%A3%AF/@22.6241337,120.2944997,17z/data=!3m1!4b1!4m5!3m4!1s0x346e04f1c1e8d8c5:0xfb9e9e9f2f5a6d5!8m2!3d22.6241337!4d120.2966934"
+          },
+          {
+            name: "Double cheese",
+            address: "高雄市三民區聯興路70號",
+            city: "高雄",
+            ayce: "Yes",
+            cuisine: "義大利麵、披薩、炸雞、濃湯",
+            price: "~450NTD",
+            website: "https://www.google.com/maps/place/Double+cheese/@22.654896,120.286848,17z/data=!3m1!4b1!4m5!3m4!1s0x346e056a2f6a8b8d:0x65a7feb3d3e1c8a1!8m2!3d22.654896!4d120.2890317"
+          },
+          {
+            name: "千房大阪燒CHIBO",
+            address: "高雄市左營區博愛二路777號漢神巨蛋購物廣場4F",
+            city: "高雄",
+            ayce: "No",
+            cuisine: "大阪燒",
+            price: "250~400NTD",
+            website: "https://www.google.com/maps/place/%E5%8D%83%E6%88%BF%E5%A4%A7%E9%98%AA%E7%87%92CHIBO/@22.682409,120.31087,17z/data=!3m1!4b1!4m5!3m4!1s0x346e05b0c8d8b2f7:0x3e9e9c8e8b3d3e5!8m2!3d22.682409!4d120.313058"
+          },
+          {
+            name: "怪獸漢堡",
+            address: "高雄市新興區信守街98號",
+            city: "高雄",
+            ayce: "No",
+            cuisine: "美式漢堡",
+            price: "260~500NTD",
+            website: "https://www.google.com/maps/place/%E6%80%AA%E7%8D%B8%E6%BC%A2%E5%A0%A1/@22.631279,120.299549,17z/data=!3m1!4b1!4m5!3m4!1s0x346e04d3e77f9e7f:0xf5e5f8a5c5a5aac1!8m2!3d22.631279!4d120.301738"
+          },
+          {
+            name: "Webberger",
+            address: "高雄市新興區民享街57號",
+            city: "高雄",
+            ayce: "No",
+            cuisine: "美式漢堡",
+            price: "260~500NTD",
+            website: "https://www.google.com/maps/place/Webberger/@22.631279,120.299549,17z/data=!3m1!4b1!4m5!3m4!1s0x346e04d3e77f9e7f:0xf5e5f8a5c5a5aac1!8m2!3d22.631279!4d120.301738"
+          },
+          {
+            name: "和牛涮",
+            address: "高雄市左營區博愛二路682號",
+            city: "高雄",
+            ayce: "Yes",
+            cuisine: "吃到飽",
+            price: "400~1200NTD",
+            website: "https://goo.gl/maps/iYkgr38uTu2Srp2m9"
+          }
+        ]
+        let results = "";
+        for(let i = 0; i < restaurants.length; i++) {
+          if((restaurants[i].city == city) && (restaurants[i].ayce == allYouCanEat) && (restaurants[i].cuisine == cuisine)) {
+            results += "<div class='result'><h2>" + restaurants[i].name + "</h2><p>地址: " + restaurants[i].address + "</p><p>提供: " + restaurants[i].cuisine + "</p><p>價格範圍: " + restaurants[i].price + "</p><p>官網: <a href='" + restaurants[i].website + "' target='_blank'>" + restaurants[i].website + "</a></p></div>";
+          }
+        }
+        if(results == "") {
+          results = "無搜尋結果(陸續增加中)";
+        }
+        document.getElementById("results").innerHTML = results;
+      }
+    </script>
+  </body>
 </html>
-
-
-
